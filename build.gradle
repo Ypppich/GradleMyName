@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.10.1'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    archivesBaseName = 'myname'
+    from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+test {
+    useJUnitPlatform()
+}
